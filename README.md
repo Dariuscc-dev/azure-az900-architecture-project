@@ -1,7 +1,7 @@
 # azure-az900-architecture-project
 Cloud architecture case study (E-commerce migration) and quick reference guide for Microsoft Azure Fundamentals (AZ-900).
 
-# ☁️ Microsoft Azure Architecture & Fundamentals (AZ-900)
+# Microsoft Azure Architecture & Fundamentals (AZ-900)
 
 ![Microsoft Azure](https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white)
 ![Certification](https://img.shields.io/badge/AZ--900-Passed-brightgreen?style=for-the-badge)
@@ -11,12 +11,12 @@ Professional reference repository for **Microsoft Azure**. It contains a **Pract
 
 ---
 
-## 🚀 PART 1: Azure Architecture Case Study
+## PART 1: Azure Architecture Case Study
 
-### 📋 Project Context
+### Project Context
 A retail company wants to migrate its traditional e-commerce platform to **Microsoft Azure** to ensure high availability, high scalability during sales peaks (e.g., Black Friday), advanced security for banking data, and operational cost optimization.
 
-### 🏗️ Solution Architecture Diagram
+### Solution Architecture Diagram
 
 ```text
                         [ USERS / CLIENTS ]
