@@ -18,29 +18,31 @@ A retail company wants to migrate its traditional e-commerce platform to **Micro
 
 ### Solution Architecture Diagram
 
-```text
-                        [ USERS / CLIENTS ]
-                                   │
-                                   ▼
-                       [ Azure Front Door / WAF ]
-                                   │
-                                   ▼
-                        [ Azure Virtual Network ]
-      ┌─────────────────────────────────────────────────────────┐
-      │  [ Frontend / Backend Subnet ]                         │
-      │   └── Azure App Service (Auto-scaling / PaaS)           │
-      │        ├── Web / API Microservice                       │
-      │        └── Azure Functions (Order Processing)           │
-      │                                                         │
-      │  [ Data / Internal Services Subnet ]                   │
-      │   ├── Azure SQL Database (Relational / Order Data)      │
-      │   ├── Azure Blob Storage (Catalog / Images)             │
-      │   └── Azure Key Vault (Secrets, Certificates & Keys)    │
-      └─────────────────────────────────────────────────────────┘
-                                   ▲
-                                   │ (Identity & RBAC Permissions)
-                        [ Microsoft Entra ID ]
-```
+graph TD
+    Users((Users / Clients)) -->|Internet| FD[Azure Front Door / WAF]
+    
+    subgraph Azure Virtual Network
+        
+        subgraph Frontend / Backend Subnet
+            App[Azure App Service]
+            Func[Azure Functions]
+            App -.->|Trigger| Func
+        end
+        
+        subgraph Data / Internal Services Subnet
+            SQL[(Azure SQL Database)]
+            Blob[(Azure Blob Storage)]
+            KV[Azure Key Vault]
+        end
+    end
+    
+    FD -->|Routes traffic| App
+    App -->|Reads/Writes| SQL
+    App -->|Saves images| Blob
+    App -->|Gets passwords| KV
+    
+    Entra[Microsoft Entra ID] -.->|RBAC Permissions| App
+    
 ### Services Breakdown & Technical Justification
 
 | Component | Selected Service | Type | Business / Technical Justification |
